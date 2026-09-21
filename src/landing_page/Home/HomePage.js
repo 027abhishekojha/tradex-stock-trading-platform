@@ -7,6 +7,7 @@ import Footer from '../Footer';
 import Awards from './Awards';
 import Pricing from './Pricing';
 import Education from './Education';
+import Varsity from './Varsity';
 
 function HomePage() {
     return (<>
@@ -16,6 +17,7 @@ function HomePage() {
         <Stats />
         <Pricing />
         <Education />
+        <Varsity />
         <OpenAccount />
         <Footer />
 

@@ -83,7 +83,7 @@ function Awards() {
                 </div>
 
                 {/* Middle Text Content */}
-                <div className='col-6'>
+                <div className='col-5'>
                     <p style={{fontSize : "15px"}} className='m-0'>
                         Need more? Build your own trading and investing experience with Kite Connect, simple HTTP APIs to place orders, stream market data, manage your account, and more. Explore <span><i className="fa-solid fa-arrow-right"></i></span>
                     </p>
