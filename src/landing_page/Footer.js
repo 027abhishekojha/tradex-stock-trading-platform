@@ -3,6 +3,7 @@ import React from 'react';
 function Footer() {
     return (
         <>
+
             <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
                 <symbol id="facebook" viewBox="0 0 16 16">
                     <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
@@ -27,181 +28,182 @@ function Footer() {
                 </symbol>
             </svg>
 
+            <footer className='bg-light bg-gradient'>
+                <div className='container-fluid border-top mb-5 '>
 
-            <div className='container-fluid border-top mb-5 bg-light bg-gradient'>
+                    <div className='container mt-5'>
+                        <div className='row'>
+                            <div className='col'>
+                                <div>
+                                    <img src='media/images/logo.svg' style={{ width: "75%" }}></img>
+                                    <p className='fs-6 mb-0'>&copy; 2010 - 2026, Zerodha Broking Ltd.</p>
+                                    <p className='mt-0'>All rights reserved.</p>
+                                </div>
 
-                <div className='container mt-5'>
-                    <div className='row'>
-                        <div className='col'>
-                            <div>
-                                <img src='media/images/logo.svg' style={{ width: "75%"}}></img>
-                                <p className='fs-6 mb-0'>&copy; 2010 - 2026, Zerodha Broking Ltd.</p>
-                                <p className='mt-0'>All rights reserved.</p>
+
+                                <div className="d-flex gap-4 mt-3">
+                                    <a href="https://instagram.com" className="text-body-secondary" aria-label="twitter-x">
+                                        <svg width="24" height="24" fill="currentColor">
+                                            <use href="#twitter-x" />
+                                        </svg>
+                                    </a>
+                                    <a href="https://facebook.com" className="text-body-secondary" aria-label="Facebook">
+                                        <svg width="24" height="24" fill="currentColor">
+                                            <use href="#facebook" />
+                                        </svg>
+                                    </a>
+                                    <a href="https://instagram.com" className="text-body-secondary" aria-label="Instagram">
+                                        <svg width="24" height="24" fill="currentColor">
+                                            <use href="#instagram" />
+                                        </svg>
+                                    </a>
+                                    <a href="https://instagram.com" className="text-body-secondary" aria-label="Instagram">
+                                        <svg width="24" height="24" fill="currentColor">
+                                            <use href="#linkedin" />
+                                        </svg>
+                                    </a>
+
+                                </div>
+
+                                <hr className='border border-tertiary' />
+
+                                <div className="d-flex gap-4 mt-3">
+                                    <a href="https://instagram.com" className="text-body-secondary" aria-label="twitter-x">
+                                        <svg width="24" height="24" fill="currentColor">
+                                            <use href="#youtube" />
+                                        </svg>
+                                    </a>
+                                    <a href="https://facebook.com" className="text-body-secondary" aria-label="Facebook">
+                                        <svg width="24" height="24" fill="currentColor">
+                                            <use href="#whatsapp" />
+                                        </svg>
+                                    </a>
+                                    <a href="https://instagram.com" className="text-body-secondary" aria-label="Instagram">
+                                        <svg width="24" height="24" fill="currentColor">
+                                            <use href="#telegram" />
+                                        </svg>
+                                    </a>
+
+                                </div>
+
+                                <div className='d-flex mt-4 gap-2'>
+                                    <img src='media/images/google-play-badge-light.svg' className='image-fluid' ></img>
+                                    <img src='media/images/appstore-badge-light.svg' className='image-fluid'></img>
+                                </div>
+
+                            </div>
+                            <div className='col '>
+                                <h1 className='fs-5 mb-4'>Account</h1>
+                                <ul className='nav flex-column'>
+                                    <li className="nav-item mb-3 text-muted">Open Demat Account</li>
+                                    <li className="nav-item mb-3 text-muted">Minor demat account</li>
+                                    <li className="nav-item mb-3 text-muted">NRI demat account</li>
+                                    <li className="nav-item mb-3 text-muted">HUF demat account</li>
+                                    <li className="nav-item mb-3 text-muted">Commodity</li>
+                                    <li className="nav-item mb-3 text-muted">Dematerialisation</li>
+                                    <li className="nav-item mb-3 text-muted">Fund transfer</li>
+                                    <li className="nav-item mb-3 text-muted">MTF</ li>
+                                </ul>
+                            </div>
+                            <div className='col '>
+                                <h1 className='fs-5 mb-4'>Support</h1>
+                                <ul className='nav flex-column'>
+                                    <li className="nav-item mb-3 text-muted">Contact us Account</li>
+                                    <li className="nav-item mb-3 text-muted">Support portal</li>
+                                    <li className="nav-item mb-3 text-muted">How to file a complaint?</li>
+                                    <li className="nav-item mb-3 text-muted">Status of your complaints</li>
+                                    <li className="nav-item mb-3 text-muted">Bulletin</li>
+                                    <li className="nav-item mb-3 text-muted">Circular</li>
+                                    <li className="nav-item mb-3 text-muted">Z-Connect blog</li>
+                                    <li className="nav-item mb-3 text-muted">Downloads</ li>
+                                </ul>
                             </div>
 
-
-                            <div className="d-flex gap-4 mt-3">
-                                <a href="https://instagram.com" className="text-body-secondary" aria-label="twitter-x">
-                                    <svg width="24" height="24" fill="currentColor">
-                                        <use href="#twitter-x" />
-                                    </svg>
-                                </a>
-                                <a href="https://facebook.com" className="text-body-secondary" aria-label="Facebook">
-                                    <svg width="24" height="24" fill="currentColor">
-                                        <use href="#facebook" />
-                                    </svg>
-                                </a>
-                                <a href="https://instagram.com" className="text-body-secondary" aria-label="Instagram">
-                                    <svg width="24" height="24" fill="currentColor">
-                                        <use href="#instagram" />
-                                    </svg>
-                                </a>
-                                <a href="https://instagram.com" className="text-body-secondary" aria-label="Instagram">
-                                    <svg width="24" height="24" fill="currentColor">
-                                        <use href="#linkedin" />
-                                    </svg>
-                                </a>
-
+                            <div className='col '>
+                                <h1 className='fs-5 mb-4'>Company</h1>
+                                <ul className='nav flex-column'>
+                                    <li className="nav-item mb-3 text-muted">About</li>
+                                    <li className="nav-item mb-3 text-muted">Philosophy</li>
+                                    <li className="nav-item mb-3 text-muted">Press & media</li>
+                                    <li className="nav-item mb-3 text-muted">Careers</li>
+                                    <li className="nav-item mb-3 text-muted">Zerodha Cares (CSR)</li>
+                                    <li className="nav-item mb-3 text-muted">Zerodha.tech</li>
+                                    <li className="nav-item mb-3 text-muted">Open source</li>
+                                    <li className="nav-item mb-3 text-muted">Referral program</ li>
+                                </ul>
                             </div>
 
-                            <hr className='border border-tertiary' />
-
-                            <div className="d-flex gap-4 mt-3">
-                                <a href="https://instagram.com" className="text-body-secondary" aria-label="twitter-x">
-                                    <svg width="24" height="24" fill="currentColor">
-                                        <use href="#youtube" />
-                                    </svg>
-                                </a>
-                                <a href="https://facebook.com" className="text-body-secondary" aria-label="Facebook">
-                                    <svg width="24" height="24" fill="currentColor">
-                                        <use href="#whatsapp" />
-                                    </svg>
-                                </a>
-                                <a href="https://instagram.com" className="text-body-secondary" aria-label="Instagram">
-                                    <svg width="24" height="24" fill="currentColor">
-                                        <use href="#telegram" />
-                                    </svg>
-                                </a>
-
-                            </div>
-
-                            <div className='d-flex mt-4 gap-2'>
-                                <img src='media/images/google-play-badge-light.svg' className='image-fluid' ></img>
-                                <img src='media/images/appstore-badge-light.svg' className='image-fluid'></img>
+                            <div className='col '>
+                                <h1 className='fs-5 mb-4'>Quick links</h1>
+                                <ul className='nav flex-column'>
+                                    <li className="nav-item mb-3 text-muted">Upcoming IPOs</li>
+                                    <li className="nav-item mb-3 text-muted">Brokerage charges</li>
+                                    <li className="nav-item mb-3 text-muted">Market holidays</li>
+                                    <li className="nav-item mb-3 text-muted">Economic calendar</li>
+                                    <li className="nav-item mb-3 text-muted">Calculators</li>
+                                    <li className="nav-item mb-3 text-muted">Markets</li>
+                                    <li className="nav-item mb-3 text-muted">Sectors</li>
+                                    <li className="nav-item mb-3 text-muted">Gift Nifty</ li>
+                                </ul>
                             </div>
 
                         </div>
-                        <div className='col '>
-                            <h1 className='fs-5 mb-4'>Account</h1>
-                            <ul className='nav flex-column'>
-                                <li className="nav-item mb-3 text-muted">Open Demat Account</li>
-                                <li className="nav-item mb-3 text-muted">Minor demat account</li>
-                                <li className="nav-item mb-3 text-muted">NRI demat account</li>
-                                <li className="nav-item mb-3 text-muted">HUF demat account</li>
-                                <li className="nav-item mb-3 text-muted">Commodity</li>
-                                <li className="nav-item mb-3 text-muted">Dematerialisation</li>
-                                <li className="nav-item mb-3 text-muted">Fund transfer</li>
-                                <li className="nav-item mb-3 text-muted">MTF</ li>
-                            </ul>
-                        </div>
-                         <div className='col '>
-                            <h1 className='fs-5 mb-4'>Support</h1>
-                            <ul className='nav flex-column'>
-                                <li className="nav-item mb-3 text-muted">Contact us Account</li>
-                                <li className="nav-item mb-3 text-muted">Support portal</li>
-                                <li className="nav-item mb-3 text-muted">How to file a complaint?</li>
-                                <li className="nav-item mb-3 text-muted">Status of your complaints</li>
-                                <li className="nav-item mb-3 text-muted">Bulletin</li>
-                                <li className="nav-item mb-3 text-muted">Circular</li>
-                                <li className="nav-item mb-3 text-muted">Z-Connect blog</li>
-                                <li className="nav-item mb-3 text-muted">Downloads</ li>
-                            </ul>
+
+                        <div className='w-0'>
+                            <p className='text-muted' style={{ fontSize: "0.75rem" }}> Zerodha Broking Limited: Member of NSE, BSE, MCX & MSEI – SEBI Registration no.: INZ000031633 CDSL/NSDL: Depository services through Zerodha Broking Limited – SEBI Registration no.: IN-DP-431-2019, CIN: U65929KA2018PLC116815, Registered Address: #153/154, 4th Cross, Dollars Colony, Opp. Clarence Public School, J.P Nagar 4th Phase, Bengaluru - 560078, Karnataka, India. For any complaints pertaining to securities broking please write to complaints@zerodha.com, for DP related to dp@zerodha.com. Please ensure you carefully read the Risk Disclosure Document as prescribed by SEBI | ICF</p>
+                            <p className='text-muted' style={{ fontSize: "0.75rem" }}>
+                                Procedure to file a complaint on SEBI SCORES/SMARTODR: Register on SCORES portal & SMARTODR. Mandatory details for filing complaints on SCORES: Name, PAN, Address, Mobile Number, E-mail ID. Benefits: Effective Communication, Speedy redressal of grievances
+                            </p>
+
+                            <p className='text-muted' style={{ fontSize: "0.75rem" }}>
+                                Smart Online Dispute Resolution | Grievances Redressal Mechanism
+                            </p>
+
+
+                            <p className='text-muted' style={{ fontSize: "0.75rem" }}>
+                                Investments in securities market are subject to market risks; read all the related documents carefully before investing.
+                            </p>
+
+                            <p className='text-muted' style={{ fontSize: "0.75rem" }}>
+                                Attention investors: 1) Stock brokers can accept securities as margins from clients only by way of pledge in the depository system w.e.f September 01, 2020. 2) Update your e-mail and phone number with your stock broker / depository participant and receive OTP directly from depository on your e-mail and/or mobile number to create pledge. 3) Check your securities / MF / bonds in the consolidated account statement issued by NSDL/CDSL every month.
+                            </p>
+
+                            <p className='text-muted' style={{ fontSize: "0.75rem" }}>
+                                India's largest broker based on networth as per NSE. NSE broker factsheet
+                            </p>
+
+                            <p className='text-muted' style={{ fontSize: "0.75rem" }}>
+                                "Prevent unauthorised transactions in your account. Update your mobile numbers/email IDs with your stock brokers/depository participants. Receive information of your transactions directly from Exchange/Depositories on your mobile/email at the end of the day. Issued in the interest of investors. KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.), you need not undergo the same process again when you approach another intermediary." Dear Investor, if you are subscribing to an IPO, there is no need to issue a cheque. Please write the Bank account number and sign the IPO application form to authorize your bank to make payment in case of allotment. In case of non allotment the funds will remain in your bank account. As a business we don't give stock tips, and have not authorized anyone to trade on behalf of others. If you find anyone claiming to be part of Zerodha and offering such services, please create a ticket here.
+                            </p>
+
+                            <p className='text-muted' style={{ fontSize: "0.75rem" }}>
+                                *Customers availing insurance advisory services offered by Ditto (Tacterial Consulting Private Limited | IRDAI Registered Corporate Agent (Composite) License No CA0738) will not have access to the exchange investor grievance redressal forum, SEBI SCORES/ODR, or arbitration mechanism for such products.
+                            </p>
+
+                            <p className='text-muted' style={{ fontSize: "0.75rem" }}>
+                                Fixed deposit products offered on this platform are third-party products (TPP) and are not Exchange traded products. These are offered through Blostem Fintech Private Limited. Zerodha Broking Limited (SEBI Registration No.: INZ000031633) is acting solely as a distributor for these products. Any disputes arising with respect to such distribution activity will not have access to SEBI SCORES/ODR, Exchange Investor Grievance Redressal Forum, or Arbitration mechanism. Fixed deposits are regulated by the Reserve Bank of India (RBI).
+                            </p>
                         </div>
 
-                        <div className='col '>
-                            <h1 className='fs-5 mb-4'>Company</h1>
-                            <ul className='nav flex-column'>
-                                <li className="nav-item mb-3 text-muted">About</li>
-                                <li className="nav-item mb-3 text-muted">Philosophy</li>
-                                <li className="nav-item mb-3 text-muted">Press & media</li>
-                                <li className="nav-item mb-3 text-muted">Careers</li>
-                                <li className="nav-item mb-3 text-muted">Zerodha Cares (CSR)</li>
-                                <li className="nav-item mb-3 text-muted">Zerodha.tech</li>
-                                <li className="nav-item mb-3 text-muted">Open source</li>
-                                <li className="nav-item mb-3 text-muted">Referral program</ li>
+                        <div className=''>
+                            <ul className='d-flex gap-5 nav' style={{ fontSize: "0.75rem", justifyContent: "center" }}>
+                                <li>NSE</li>
+                                <li>BSE</li>
+                                <li>MCX</li>
+                                <li>MSEI</li>
+                                <li>Terms & conditions</li>
+                                <li>Policies & procedures</li>
+                                <li>Privacy policy</li>
+                                <li>Disclosure </li>
+                                <li>For investor's attention </li>
+                                <li>Investor charter </li>
+                                <li>Sitemap</li>
                             </ul>
                         </div>
-
-                        <div className='col '>
-                            <h1 className='fs-5 mb-4'>Quick links</h1>
-                            <ul className='nav flex-column'>
-                                <li className="nav-item mb-3 text-muted">Upcoming IPOs</li>
-                                <li className="nav-item mb-3 text-muted">Brokerage charges</li>
-                                <li className="nav-item mb-3 text-muted">Market holidays</li>
-                                <li className="nav-item mb-3 text-muted">Economic calendar</li>
-                                <li className="nav-item mb-3 text-muted">Calculators</li>
-                                <li className="nav-item mb-3 text-muted">Markets</li>
-                                <li className="nav-item mb-3 text-muted">Sectors</li>
-                                <li className="nav-item mb-3 text-muted">Gift Nifty</ li>
-                            </ul>
-                        </div>
-                        
                     </div>
 
-                    <div className='w-0'>
-                        <p className='text-muted' style={{fontSize : "0.75rem"}}> Zerodha Broking Limited: Member of NSE, BSE, MCX & MSEI – SEBI Registration no.: INZ000031633 CDSL/NSDL: Depository services through Zerodha Broking Limited – SEBI Registration no.: IN-DP-431-2019, CIN: U65929KA2018PLC116815, Registered Address: #153/154, 4th Cross, Dollars Colony, Opp. Clarence Public School, J.P Nagar 4th Phase, Bengaluru - 560078, Karnataka, India. For any complaints pertaining to securities broking please write to complaints@zerodha.com, for DP related to dp@zerodha.com. Please ensure you carefully read the Risk Disclosure Document as prescribed by SEBI | ICF</p>
-                        <p className='text-muted' style={{fontSize : "0.75rem"}}>
-                            Procedure to file a complaint on SEBI SCORES/SMARTODR: Register on SCORES portal & SMARTODR. Mandatory details for filing complaints on SCORES: Name, PAN, Address, Mobile Number, E-mail ID. Benefits: Effective Communication, Speedy redressal of grievances
-                        </p>
-
-                         <p className='text-muted' style={{fontSize : "0.75rem"}}>
-                           Smart Online Dispute Resolution | Grievances Redressal Mechanism
-                        </p>
-
-
-                         <p className='text-muted' style={{fontSize : "0.75rem"}}>
-                           Investments in securities market are subject to market risks; read all the related documents carefully before investing.
-                        </p>
-
-                         <p className='text-muted' style={{fontSize : "0.75rem"}}>
-                           Attention investors: 1) Stock brokers can accept securities as margins from clients only by way of pledge in the depository system w.e.f September 01, 2020. 2) Update your e-mail and phone number with your stock broker / depository participant and receive OTP directly from depository on your e-mail and/or mobile number to create pledge. 3) Check your securities / MF / bonds in the consolidated account statement issued by NSDL/CDSL every month.
-                        </p>
-
-                         <p className='text-muted' style={{fontSize : "0.75rem"}}>
-                           India's largest broker based on networth as per NSE. NSE broker factsheet
-                        </p>
-
-                         <p className='text-muted' style={{fontSize : "0.75rem"}}>
-                            "Prevent unauthorised transactions in your account. Update your mobile numbers/email IDs with your stock brokers/depository participants. Receive information of your transactions directly from Exchange/Depositories on your mobile/email at the end of the day. Issued in the interest of investors. KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.), you need not undergo the same process again when you approach another intermediary." Dear Investor, if you are subscribing to an IPO, there is no need to issue a cheque. Please write the Bank account number and sign the IPO application form to authorize your bank to make payment in case of allotment. In case of non allotment the funds will remain in your bank account. As a business we don't give stock tips, and have not authorized anyone to trade on behalf of others. If you find anyone claiming to be part of Zerodha and offering such services, please create a ticket here.
-                        </p>
-                    
-                         <p className='text-muted' style={{fontSize : "0.75rem"}}>
-                            *Customers availing insurance advisory services offered by Ditto (Tacterial Consulting Private Limited | IRDAI Registered Corporate Agent (Composite) License No CA0738) will not have access to the exchange investor grievance redressal forum, SEBI SCORES/ODR, or arbitration mechanism for such products.
-                        </p>
-                    
-                         <p className='text-muted' style={{fontSize : "0.75rem"}}>
-                           Fixed deposit products offered on this platform are third-party products (TPP) and are not Exchange traded products. These are offered through Blostem Fintech Private Limited. Zerodha Broking Limited (SEBI Registration No.: INZ000031633) is acting solely as a distributor for these products. Any disputes arising with respect to such distribution activity will not have access to SEBI SCORES/ODR, Exchange Investor Grievance Redressal Forum, or Arbitration mechanism. Fixed deposits are regulated by the Reserve Bank of India (RBI).
-                        </p>
-                    </div>
-
-                    <div className=''>
-                        <ul className='d-flex gap-5 nav' style={{fontSize : "0.75rem", justifyContent : "center"}}>
-                            <li>NSE</li>
-                            <li>BSE</li>
-                            <li>MCX</li>
-                            <li>MSEI</li>
-                            <li>Terms & conditions</li>
-                            <li>Policies & procedures</li>
-                            <li>Privacy policy</li>
-                            <li>Disclosure </li>
-                            <li>For investor's attention </li>
-                            <li>Investor charter </li>
-                            <li>Sitemap</li>
-                        </ul>
-                    </div>
                 </div>
-
-            </div>
+            </footer>
         </>
     );
 }

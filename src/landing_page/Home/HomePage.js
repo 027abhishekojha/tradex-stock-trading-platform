@@ -11,7 +11,6 @@ import Varsity from './Varsity';
 
 function HomePage() {
     return (<>
-        <Navbar />
         <Hero />
         <Awards />
         <Stats />
@@ -19,7 +18,6 @@ function HomePage() {
         <Education />
         <Varsity />
         <OpenAccount />
-        <Footer />
     </>);
 }
 
