@@ -20,7 +20,6 @@ function HomePage() {
         <Varsity />
         <OpenAccount />
         <Footer />
-
     </>);
 }
 
