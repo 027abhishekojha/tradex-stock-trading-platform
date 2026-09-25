@@ -1,8 +1,13 @@
 import React from 'react';
+import Accordion from "./Accordion";
+import SupportHero from "./Hero";
+
 
 function SupportPage() {
     return ( <>
-        <h1>SupportPage</h1>
+        <SupportHero />
+        <Accordion />
+        {/*<SupportHero />*/}
     </> );
 }
 

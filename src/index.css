@@ -16,3 +16,9 @@ code {
 /*.nav-link{*/
 /*  margin-left: 60px;*/
 /*}*/
+
+/* index.css or App.css */
+.support-border-orange {
+  border-left-color: orange !important;
+}
+
