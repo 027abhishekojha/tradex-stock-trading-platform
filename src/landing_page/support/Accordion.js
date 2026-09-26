@@ -9,13 +9,22 @@ function Accordion(){
                 <div className="col-8 ">
                     <div className="container my-5">
                         <div className="accordion" id="accordionPanelsStayOpenExample">
-                            <div className="accordion-item">
+                            <div className="accordion-item mb-3">
                                 <h2 className="accordion-header">
-                                    <button className="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapseOne">
-                                        Accordion Item #1
-                                    </button>
+
+                                    <div className="row m-0 p-0 align-items-center" style={{ backgroundColor : "rgb(223, 235, 240)"}}>
+                                        <div className="col" style={{width:'0.5rem'}}>
+                                            <i className="fa fa-plus-circle" style={{color : "grey"}}></i>
+                                        </div>
+                                        <div className="col-11 m-0 p-0">
+                                            <button className="accordion-button" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                                    aria-controls="panelsStayOpen-collapseOne">
+                                                Account Opening
+                                            </button>
+                                        </div>
+
+                                    </div>
                                 </h2>
                                 <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show">
                                     <div className="accordion-body">
