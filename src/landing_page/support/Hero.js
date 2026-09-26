@@ -10,7 +10,7 @@ function SupportHero(){
                 </div>
                 <div className="col-9">
                     <div className="d-flex justify-content-end mt-5">
-                        <button className="btn btn-primary btn-lg fw-semibold p-2" style={{width: "8em" , borderRadius : "2px"}}
+                        <button className="btn btn-primary btn-lg fw-semibold p-2" style={{width: "8em" , borderRadius : "2px", backgroundColor : "rgba(57, 125, 208, 1)"}}
                                 type="button">My tickets
                         </button>
                     </div>
