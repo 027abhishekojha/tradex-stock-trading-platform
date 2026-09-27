@@ -53,6 +53,12 @@ export const watchlist = [
         percent: "1.04%",
         isDown: false,
     },
+    {
+        name: "AZUL",
+        price: 900.4,
+        percent: "2.04%",
+        isDown: false,
+    },
 ];
 
 // holdings
