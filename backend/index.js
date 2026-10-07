@@ -3,12 +3,20 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
+const cors = require("cors")
+const bodyParser = require("body-parser")
 
 
-const mongo_URI = process.env.MONGO_URL
+
+const mongo_URI = process.env.MONGO_URL;
+
+const { OrdersModel } = require("./model/OrdersModel");
+const { OrdersSchema } = require("./schemas/OrdersSchema");
 
 
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
 
 app.get("/addHoldings", async (req, res) => {
@@ -151,39 +159,156 @@ app.get("/addPositions", async (req, res) => {
 
     try {
         const tempPosition = [
-        {
-            product: "CNC",
-            name: "EVEREADY",
-            qty: 2,
-            avg: 316.27,
-            price: 312.35,
-            net: "+0.58%",
-            day: "-1.24%",
-            isLoss: true,
-        },
-        {
-            product: "CNC",
-            name: "JUBLFOOD",
-            qty: 1,
-            avg: 3124.75,
-            price: 3082.65,
-            net: "+10.04%",
-            day: "-1.35%",
-            isLoss: true,
-        },
+            {
+                product: "CNC",
+                name: "EVEREADY",
+                qty: 2,
+                avg: 316.27,
+                price: 312.35,
+                net: "+0.58%",
+                day: "-1.24%",
+                isLoss: true,
+            },
+            {
+                product: "CNC",
+                name: "JUBLFOOD",
+                qty: 1,
+                avg: 3124.75,
+                price: 3082.65,
+                net: "+10.04%",
+                day: "-1.35%",
+                isLoss: true,
+            },
 
-        
-    ];
+
+        ];
         await PositionsModel.deleteMany({});
         await PositionsModel.insertMany(tempPosition)
-        res.send("Position Data Added SuccessFully")    
+        res.send("Position Data Added SuccessFully")
     } catch (error) {
-       console.error(error);
+        console.error(error);
         res.status(500).send(error.message);
     }
-    
+
 });
 
+
+app.get("/getAllHoldings", async (req, res) => {
+    try {
+        let allHoldings = await HoldingsModel.find({});
+        let result = res.json(allHoldings)
+        res.json(result);
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+app.get("/getAllPositions", async (req, res) => {
+    try {
+        let allPositions = await PositionsModel.find({})
+        let result = res.json(allPositions)
+        res.json(result);
+        return result;
+    } catch (error) {
+        console.log(error);
+
+    }
+});
+
+app.get("/allOrders", async (req, res) => {
+    try {
+        let allOrders = await OrdersModel.find({})
+        let result = res.json(allOrders)
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
+// buy Order
+app.post("/newOrder", async (req, res) => {
+
+    try {
+        const { name, qty, price, mode } = req.body;
+
+        const newOrder = new OrdersModel({ name, qty, price, mode });
+        const saveOrder = await newOrder.save();
+
+        return res.status(200).json({
+            message: "Order added SuccessFully",
+            data: saveOrder
+        });
+    } catch (error) {
+        console.error("Error creating order :", error);
+        return res.status(500).json({
+            error: error.message || "failed to create order",
+        });
+    }
+});
+
+
+// Sell Orders
+// app.post("/sellOrder", async (req, res) => {
+//     try {
+//         const {name, qty, price, mode} = req.body;
+//         const newOrder = new OrdersModel({name, qty, price, mode});
+//         const saveOrder = await newOrder.save();
+
+//         return res.status(200).json({
+//             message: "Order added SuccessFully",
+//             data: saveOrder
+//         });
+//     } catch (error) {
+//          console.error("Error creating order :", error);
+//         return res.status(500).json({
+//             error: error.message || "failed to create order",
+//         });
+//     }
+// });
+
+// POST /sellOrder
+app.post("/sellOrder", async (req, res) => {
+  try {
+    const { name, qty, price } = req.body;
+    const orderQty = Number(qty);
+
+    // 1. Find if the user owns this stock in Holdings
+    const holding = await HoldingsModel.findOne({ name });
+
+    // 2. Reject if they don't own it or don't have enough shares
+    if (!holding || holding.qty < orderQty) {
+      return res.status(400).json({
+        error: `Insufficient holdings. You own ${holding ? holding.qty : 0} shares of ${name}.`,
+      });
+    }
+
+    // 3. Deduct from Holdings (or delete if qty reaches 0)
+    holding.qty -= orderQty;
+    if (holding.qty === 0) {
+      await HoldingsModel.deleteOne({ _id: holding._id });
+    } else {
+      await holding.save();
+    }
+
+    // 4. Record the transaction in Orders
+    const newOrder = await OrdersModel.create({
+      name,
+      qty: orderQty,
+      price: Number(price),
+      mode: "SELL",
+    });
+
+    return res.status(201).json({
+      message: "Sell order executed successfully",
+      data: newOrder,
+    });
+  } catch (error) {
+    console.error("Sell order error:", error);
+    return res.status(500).json({ error: error.message });
+  }
+});
 
 
 
