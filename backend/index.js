@@ -3,8 +3,9 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
-const cors = require("cors")
-const bodyParser = require("body-parser")
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const authRoute = require("./Routes/UserAuthRoute");
 
 
 
@@ -15,7 +16,16 @@ const { OrdersSchema } = require("./schemas/OrdersSchema");
 
 
 const app = express();
-app.use(cors());
+app.use(cors(
+    {
+        origin: ["http://localhost:3000"],
+        methods: ['GET', "POST", "PUT", "DELETE"],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true
+    }
+));
+
+
 app.use(bodyParser.json());
 
 
@@ -270,52 +280,53 @@ app.post("/newOrder", async (req, res) => {
 
 // POST /sellOrder
 app.post("/sellOrder", async (req, res) => {
-  try {
-    const { name, qty, price } = req.body;
-    const orderQty = Number(qty);
+    try {
+        const { name, qty, price } = req.body;
+        const orderQty = Number(qty);
 
-    // 1. Find if the user owns this stock in Holdings
-    const holding = await HoldingsModel.findOne({ name });
+        // 1. Find if the user owns this stock in Holdings
+        const holding = await HoldingsModel.findOne({ name });
 
-    // 2. Reject if they don't own it or don't have enough shares
-    if (!holding || holding.qty < orderQty) {
-      return res.status(400).json({
-        error: `Insufficient holdings. You own ${holding ? holding.qty : 0} shares of ${name}.`,
-      });
+        // 2. Reject if they don't own it or don't have enough shares
+        if (!holding || holding.qty < orderQty) {
+            return res.status(400).json({
+                error: `Insufficient holdings. You own ${holding ? holding.qty : 0} shares of ${name}.`,
+            });
+        }
+
+        // 3. Deduct from Holdings (or delete if qty reaches 0)
+        holding.qty -= orderQty;
+        if (holding.qty === 0) {
+            await HoldingsModel.deleteOne({ _id: holding._id });
+        } else {
+            await holding.save();
+        }
+
+        // 4. Record the transaction in Orders
+        const newOrder = await OrdersModel.create({
+            name,
+            qty: orderQty,
+            price: Number(price),
+            mode: "SELL",
+        });
+
+        return res.status(201).json({
+            message: "Sell order executed successfully",
+            data: newOrder,
+        });
+    } catch (error) {
+        console.error("Sell order error:", error);
+        return res.status(500).json({ error: error.message });
     }
-
-    // 3. Deduct from Holdings (or delete if qty reaches 0)
-    holding.qty -= orderQty;
-    if (holding.qty === 0) {
-      await HoldingsModel.deleteOne({ _id: holding._id });
-    } else {
-      await holding.save();
-    }
-
-    // 4. Record the transaction in Orders
-    const newOrder = await OrdersModel.create({
-      name,
-      qty: orderQty,
-      price: Number(price),
-      mode: "SELL",
-    });
-
-    return res.status(201).json({
-      message: "Sell order executed successfully",
-      data: newOrder,
-    });
-  } catch (error) {
-    console.error("Sell order error:", error);
-    return res.status(500).json({ error: error.message });
-  }
 });
 
 
+app.use("/", authRoute);
 
 app.listen(process.env.EXPRESS_SERVER_PORT, () => {
-    console.log("Express App Started");
+    console.log(`Express App Started on port : ${process.env.EXPRESS_SERVER_PORT}`);
     try {
-        mongoose.connect(mongo_URI);
+        mongoose.connect(mongo_URI, {dbName : "login_signup"});
         console.log("Mongo Db Connected Successfully")
     } catch (error) {
         console.log("some error occured", error);
