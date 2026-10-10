@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css"; // Required for toast styles to display properly
+
+
 import {
     MDBBtn,
     MDBContainer,
@@ -15,10 +20,12 @@ import {
     from 'mdb-react-ui-kit';
 
 function Signup() {
+    const navigate = useNavigate();
+
     const [inputValue, setInputValue] = useState({
         username: "",
         email: "",
-        password: ""
+        password: "",
     });
 
     const { username, email, password } = inputValue
@@ -32,6 +39,46 @@ function Signup() {
             [name]: value
         }));
     }
+
+    const handleError = (msg) => toast.error(msg, { position: "bottom-left" });
+
+    const handleSuccess = (msg) => toast.success(msg, { position: "bottom-right" });
+
+    const toastMessage = () => {
+        toast("This is toast msg", { position: "bottom-right" });
+    }
+
+
+
+    const handleOnSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const { data } = await axios.post("http://localhost:3002/Signup", inputValue, { withCredentials: true });
+
+            const { success, message } = data;
+
+            if (success) {
+                handleSuccess(message || "Account created successfully!");
+                setInputValue({
+                    username: "",
+                    email: "",
+                    password: "",
+                });
+
+                setTimeout(() => {
+                    navigate("/login");
+                }, 1000)
+            } else {
+                handleError(message || "Signup failed. Please try again.");
+            }
+
+        } catch (error) {
+            console.error("Error is : ", error);
+            handleError(error);
+        }
+    };
+
     return (
         <div className='container pt-5'>
 
@@ -44,11 +91,11 @@ function Signup() {
 
                                 <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-                                <form>
+                                <form onSubmit={handleOnSubmit}>
                                     <div className="d-flex flex-row align-items-center mb-4 ">
                                         <MDBIcon fas icon="user me-3" size='lg' />
                                         <label htmlFor='username'></label>
-                                        
+
                                         <MDBInput id='username'
                                             name='username'
                                             placeholder='Enter username'
@@ -88,9 +135,10 @@ function Signup() {
                                         </span>
                                     </div>
 
-                                    <MDBBtn className='me-1' size='lg' color='primary' style={{ width: "8em", borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)" }}>Register</MDBBtn>
+                                    <MDBBtn type='submit' className='me-1' size='lg' color='primary' style={{ width: "8em", borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)" }}>Register</MDBBtn>
+                                    <MDBBtn type='submit' className='me-1' size='lg' color='primary' onClick={toastMessage} style={{ width: "8em", borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)" }}>Toast Demo</MDBBtn>
                                 </form>
-
+                                <ToastContainer />
                             </MDBCol>
 
                             <MDBCol md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
