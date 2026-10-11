@@ -6,6 +6,10 @@ const { PositionsModel } = require("./model/PositionsModel");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const authRoute = require("./Routes/UserAuthRoute");
+const cookieParser = require('cookie-parser');
+
+
+
 
 
 
@@ -16,6 +20,9 @@ const { OrdersSchema } = require("./schemas/OrdersSchema");
 
 
 const app = express();
+
+
+
 app.use(cors(
     {
         origin: ["http://localhost:3000"],
@@ -25,8 +32,10 @@ app.use(cors(
     }
 ));
 
-
+app.use(cookieParser());
 app.use(bodyParser.json());
+
+app.use("/", authRoute);
 
 
 app.get("/addHoldings", async (req, res) => {
@@ -321,7 +330,7 @@ app.post("/sellOrder", async (req, res) => {
 });
 
 
-app.use("/", authRoute);
+
 
 app.listen(process.env.EXPRESS_SERVER_PORT, () => {
     console.log(`Express App Started on port : ${process.env.EXPRESS_SERVER_PORT}`);
