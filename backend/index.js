@@ -7,12 +7,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const authRoute = require("./Routes/UserAuthRoute");
 const cookieParser = require('cookie-parser');
-
-
-
-
-
-
 const mongo_URI = process.env.MONGO_URL;
 
 const { OrdersModel } = require("./model/OrdersModel");
@@ -25,7 +19,7 @@ const app = express();
 
 app.use(cors(
     {
-        origin: ["http://localhost:3000"],
+        origin: ["http://localhost:3001"],
         methods: ['GET', "POST", "PUT", "DELETE"],
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true
@@ -335,7 +329,7 @@ app.post("/sellOrder", async (req, res) => {
 app.listen(process.env.EXPRESS_SERVER_PORT, () => {
     console.log(`Express App Started on port : ${process.env.EXPRESS_SERVER_PORT}`);
     try {
-        mongoose.connect(mongo_URI, {dbName : "login_signup"});
+        mongoose.connect(mongo_URI, {dbName : "zerodha"});
         console.log("Mongo Db Connected Successfully")
     } catch (error) {
         console.log("some error occured", error);
