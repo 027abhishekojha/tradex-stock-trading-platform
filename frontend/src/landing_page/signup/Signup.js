@@ -52,9 +52,10 @@ function Signup() {
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
-
         try {
             const { data } = await axios.post("http://localhost:3002/Signup", inputValue, { withCredentials: true });
+            console.log("data from axios api : ", data);
+            
 
             const { success, message } = data;
 
@@ -135,8 +136,8 @@ function Signup() {
                                         </span>
                                     </div>
 
-                                    <MDBBtn type='submit' className='me-1' size='lg' color='primary' style={{ width: "8em", borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)" }}>Register</MDBBtn>
-                                    <MDBBtn type='submit' className='me-1' size='lg' color='primary' onClick={toastMessage} style={{ width: "8em", borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)" }}>Toast Demo</MDBBtn>
+                                    <MDBBtn type='submit' noRipple className='me-1' size='lg' color='primary' style={{ width: "8em", borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)" }}>Register</MDBBtn>
+                                    {/* <MDBBtn type='submit' className='me-1' size='lg' color='primary' onClick={toastMessage} style={{ width: "8em", borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)" }}>Toast Demo</MDBBtn> */}
                                 </form>
                                 <ToastContainer />
                             </MDBCol>

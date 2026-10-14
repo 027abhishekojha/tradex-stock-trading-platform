@@ -1,6 +1,9 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import { Navigate, useNavigate } from 'react-router-dom';
 import {
     MDBContainer,
     MDBInput,
@@ -14,6 +17,8 @@ import {
 
 function Login() {
 
+    const navigate = useNavigate();
+
     const [inputValue, setInputValue] = useState({
         email: "",
         password: ""
@@ -21,7 +26,7 @@ function Login() {
 
     const { email, password } = inputValue;
     console.log(`Email : ${email} password : ${password}`);
-    
+
 
     const handleOnChange = (event) => {
         const { name, value } = event.target;
@@ -30,6 +35,37 @@ function Login() {
             ...prev,
             [name]: value
         }));
+    }
+
+    const handleSuccess = (msg) => toast.success(msg, { position: "bottom-right" });
+
+    const handleError = (msg) => toast.error(msg, { position: "bottom-left" });
+
+    const handleOnSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const { data } = await axios.post("http://localhost:3002/Login",
+                inputValue, { withCredentials: true });
+
+            const { success, message } = data;
+
+            if (success) {
+                handleSuccess(message || "User Logged In Successfully!!!!");
+                setInputValue({ email: "", password: "" });
+                setTimeout(() => {
+                    navigate("/NewHome");
+                }, 1000)
+            } else {
+                handleError(message || "Username password wrong");
+            }
+        } catch (error) {
+            console.error("Error is : ", error);
+        }
+    }
+
+    const dummyToast = () => {
+        toast("This is dummy toast");
     }
 
     return (
@@ -46,9 +82,9 @@ function Login() {
                             />
                         </div>
 
-                         <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
+                        <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
 
-                        <form>
+                        <form onSubmit={handleOnSubmit}>
                             <div className="d-flex align-items-center mb-4">
                                 <MDBIcon fas icon="envelope" size="lg" className="me-3" style={{ color: "rgba(57, 125, 208, 1)" }} />
                                 <MDBInput
@@ -76,9 +112,11 @@ function Login() {
                             </div>
 
                             <div className="d-flex justify-content-center mb-4">
-                                <MDBBtn className='w-50' color='primary' style={{ borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)", }}>Login</MDBBtn>
+                                <MDBBtn type='submit' className='w-50' color='primary' noRipple style={{ borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)", }}>Login</MDBBtn>
+                                {/* <MDBBtn type='submit' className='w-50' color='primary' onClick={dummyToast} style={{ borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)", }}>Toast</MDBBtn> */}
                             </div>
                         </form>
+                        <ToastContainer />
 
 
                         <div className="text-center">
