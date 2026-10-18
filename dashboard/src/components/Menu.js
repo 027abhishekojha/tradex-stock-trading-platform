@@ -1,9 +1,15 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom" ;
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import GeneralContext from "./GeneralContext";
 
-const Menu = () => {
+const DashboardMenu = () => {
   const[selectedMenu, setSelectedMenu] = useState(0);
   const[isProfileDropDownOpen, setIsProfileDropdownOpen] = useState(false);
+
+  const {logout, user} = useContext(GeneralContext)
 
   const handleMenuClick = (index) => {
     setSelectedMenu(index);
@@ -15,6 +21,20 @@ const Menu = () => {
 
   const menuClass = "menu";
   const activeMenuClass = "menu selected";
+
+  const id = React.useId();
+  const buttonId = `${id}-button`;
+  const menuId = `${id}-menu`;
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
 
 
   return (
@@ -74,11 +94,37 @@ const Menu = () => {
         <hr />
         <div className="profile" onClick={handleProfileClick}>
           <div className="avatar">ZU</div>
-          <p className="username">USERID</p>
+          {/* <p className="username">USERID</p> */}
+          <div>
+      <Button
+        id={buttonId}
+        aria-controls={open ? menuId : undefined}
+        aria-haspopup="true"
+        aria-expanded={open}
+        onClick={handleClick}
+      >
+        {user}
+      </Button>
+      <Menu
+        id={menuId}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        slotProps={{
+          list: {
+            'aria-labelledby': buttonId,
+          },
+        }}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={logout}>Logout</MenuItem>
+      </Menu>
+    </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Menu;
+export default DashboardMenu;

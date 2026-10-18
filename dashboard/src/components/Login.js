@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -14,7 +14,10 @@ import {
 }
     from 'mdb-react-ui-kit';
 
+import GeneralContext from "./GeneralContext";
+
 function Login() {
+    const { setUser } = useContext(GeneralContext);
 
     const navigate = useNavigate();
 
@@ -22,6 +25,8 @@ function Login() {
         email: "",
         password: ""
     });
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const { email, password } = inputValue;
     console.log(`Email : ${email} password : ${password}`);
@@ -42,6 +47,7 @@ function Login() {
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         try {
             const { data } = await axios.post("http://localhost:3002/Login",
@@ -50,16 +56,30 @@ function Login() {
             const { success, message } = data;
 
             if (success) {
-                handleSuccess(message || "User Logged In Successfully!!!!");
+                if (data.token) {
+                    localStorage.setItem("token", data.token);
+                }
+
+                if (data.user) {
+                    setUser(data.user); // <--- Updates context state immediately!
+                }
+
+                handleSuccess(message || "Login successful!");
                 setInputValue({ email: "", password: "" });
                 setTimeout(() => {
-                    navigate("/Home");
-                }, 1000)
+                    navigate("/");
+                }, 1000);
             } else {
-                handleError(message || "Username password wrong");
+                handleError(message || "Login failed. Please check your credentials.");
             }
         } catch (error) {
-            console.error("Error is : ", error);
+            const serverMessage =
+                error.response?.data?.message ||
+                error.message ||
+                "An unexpected error occurred. Please try again.";
+            handleError(serverMessage);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -117,7 +137,7 @@ function Login() {
                             </div>
 
                             <div className="d-flex justify-content-center mb-4">
-                                <MDBBtn type='submit' className='w-50' color='primary' noRipple style={{ borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)", }}>Login</MDBBtn>
+                                <MDBBtn type='submit' className='w-50' color='primary' noRipple style={{ borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)", }}> {isLoading ? "Logging in..." : "Submit"}</MDBBtn>
                                 {/* <MDBBtn type='submit' className='w-50' color='primary' onClick={dummyToast} style={{ borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)", }}>Toast</MDBBtn> */}
                             </div>
                         </form>

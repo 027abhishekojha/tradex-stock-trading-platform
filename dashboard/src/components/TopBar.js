@@ -1,6 +1,6 @@
 import React from "react";
 
-import Menu from "./Menu";
+import DashboardMenu from "./Menu";
 
 const TopBar = () => {
   return (
@@ -18,7 +18,7 @@ const TopBar = () => {
         </div>
       </div>
 
-      <Menu />
+      <DashboardMenu />
     </div>
   );
 };

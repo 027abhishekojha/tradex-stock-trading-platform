@@ -27,7 +27,9 @@ function Signup() {
         password: ""
     });
 
-    const {username, email, password} = inputValue;
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { username, email, password } = inputValue;
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
@@ -38,38 +40,39 @@ function Signup() {
     };
 
     const handleError = (msg) => toast.error(msg, { position: "bottom-left" });
-    
+
     const handleSuccess = (msg) => toast.success(msg, { position: "bottom-right" });
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         try {
             const { data } = await axios.post("http://localhost:3002/Signup", inputValue, { withCredentials: true });
             console.log("data from axios api : ", data.success, data.message);
             const { success, message } = data;
 
             if (success) {
-                handleSuccess(message || "Account created successfully!");
-                setInputValue({
-                    username: "",
-                    email: "",
-                    password: "",
-                });
-
+                handleSuccess(message || "Login successful!");
+                setInputValue({ email: "", password: "" });
                 setTimeout(() => {
-                    navigate("/");
+                    navigate("/Login");
                 }, 1000);
             } else {
-                 handleError(message || "Signup failed. Please try again.");
+                handleError(message || "Login failed. Please check your credentials.");
             }
         } catch (error) {
-            console.error(error);
-            handleError(error || "Signup failed. Please try again.");
+            const serverMessage =
+                error.response?.data?.message ||
+                error.message ||
+                "An unexpected error occurred. Please try again.";
+            handleError(serverMessage);
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
-        <div style={{width : "65%", display : "flex", justifyContent : "center" , alignSelf : 'center', margin: "auto"}}>
+        <div style={{ width: "65%", display: "flex", justifyContent: "center", alignSelf: 'center', margin: "auto" }}>
 
             <MDBContainer fluid>
                 <MDBCard className='text-black m-5' style={{ borderRadius: '25px' }}>
@@ -123,7 +126,7 @@ function Signup() {
                                         </span>
                                     </div>
 
-                                    <MDBBtn type='submit' noRipple className='me-1' size='lg' color='primary' style={{ width: "8em", borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)" }}>Register</MDBBtn>
+                                    <MDBBtn type='submit' noRipple className='me-1' size='lg' color='primary' style={{ width: "8em", borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)" }}>{ isLoading ? "Signing up user..." : "Submit"}</MDBBtn>
                                     {/* <MDBBtn type='submit' className='me-1' size='lg' color='primary' onClick={toastMessage} style={{ width: "8em", borderRadius: "2px", backgroundColor: "rgba(57, 125, 208, 1)" }}>Toast Demo</MDBBtn> */}
                                 </form>
                                 <ToastContainer />
