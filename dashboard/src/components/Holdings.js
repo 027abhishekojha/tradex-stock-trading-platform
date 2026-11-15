@@ -3,12 +3,26 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from 'axios';
+import {VerticalCharts} from "./VerticalCharts";
 
 
 
 const Holdings = () => {
 
   const [allHoldings, setAllHoldings] = useState([]);
+
+  const labels = allHoldings.map((SubArray) => SubArray["name"]);
+
+  const data = {
+    labels,
+    datasets : [
+      {
+        label: 'Stock Name',
+        data: allHoldings.map((stock) => stock.price),
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+    ]
+  }
 
   useEffect(() => {
     try {
@@ -86,6 +100,7 @@ const Holdings = () => {
           <p>P&L</p>
         </div>
       </div>
+      <VerticalCharts data={data}/>
     </>
   );
 };
